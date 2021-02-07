@@ -3,7 +3,7 @@ package dingrobot_test
 import (
 	"log"
 
-	"github.com/royeo/dingrobot"
+	"github.com/LinkinStars/dingrobot"
 )
 
 func ExampleSendText() {
@@ -11,11 +11,13 @@ func ExampleSendText() {
 	webhook := "https://oapi.dingtalk.com/robot/send?access_token=xxx"
 	robot := dingrobot.NewRobot(webhook)
 
+	// You can set secret here with your own
+	//robot.SetSecret("")
+
 	content := "我就是我,  @1825718XXXX 是不一样的烟火"
 	atMobiles := []string{"1825718XXXX"}
-	isAtAll := false
 
-	err := robot.SendText(content, atMobiles, isAtAll)
+	err := robot.SendText(content, atMobiles, false)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -45,9 +47,8 @@ func ExampleSendMarkdown() {
 	title := "杭州天气"
 	text := "#### 杭州天气  \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73%\n\n > ![screenshot](http://i01.lw.aliimg.com/media/lALPBbCc1ZhJGIvNAkzNBLA_1200_588.png)\n  > ###### 10点20分发布 [天气](http://www.thinkpage.cn/) "
 	atMobiles := []string{"1825718XXXX"}
-	isAtAll := false
 
-	err := robot.SendMarkdown(title, text, atMobiles, isAtAll)
+	err := robot.SendMarkdown(title, text, atMobiles, false)
 	if err != nil {
 		log.Fatal(err)
 	}
