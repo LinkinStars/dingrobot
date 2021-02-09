@@ -2,17 +2,21 @@ package dingrobot_test
 
 import (
 	"log"
+	"testing"
 
 	"github.com/LinkinStars/dingrobot"
 )
 
-func ExampleSendText() {
+const (
 	// You should replace the webhook here with your own.
-	webhook := "https://oapi.dingtalk.com/robot/send?access_token=xxx"
-	robot := dingrobot.NewRobot(webhook)
+	webhook = "https://oapi.dingtalk.com/robot/send?access_token=xxx"
+	// You can set secret here with your own if you have it.
+	secret = ""
+)
 
-	// You can set secret here with your own
-	//robot.SetSecret("")
+func TestRobot_SendText(t *testing.T) {
+	robot := dingrobot.NewRobot(webhook)
+	robot.SetSecret(secret)
 
 	content := "我就是我,  @1825718XXXX 是不一样的烟火"
 	atMobiles := []string{"1825718XXXX"}
@@ -23,10 +27,9 @@ func ExampleSendText() {
 	}
 }
 
-func ExampleSendLink() {
-	// You should replace the webhook here with your own.
-	webhook := "https://oapi.dingtalk.com/robot/send?access_token=xxx"
+func TestRobot_SendLink(t *testing.T) {
 	robot := dingrobot.NewRobot(webhook)
+	robot.SetSecret(secret)
 
 	title := "自定义机器人协议"
 	text := "群机器人是钉钉群的高级扩展功能。群机器人可以将第三方服务的信息聚合到群聊中，实现自动化的信息同步。例如：通过聚合GitHub，GitLab等源码管理服务，实现源码更新同步；通过聚合Trello，JIRA等项目协调服务，实现项目信息同步。不仅如此，群机器人支持Webhook协议的自定义接入，支持更多可能性，例如：你可将运维报警提醒通过自定义机器人聚合到钉钉群。"
@@ -39,10 +42,9 @@ func ExampleSendLink() {
 	}
 }
 
-func ExampleSendMarkdown() {
-	// You should replace the webhook here with your own.
-	webhook := "https://oapi.dingtalk.com/robot/send?access_token=xxx"
+func TestRobot_SendMarkdown(t *testing.T) {
 	robot := dingrobot.NewRobot(webhook)
+	robot.SetSecret(secret)
 
 	title := "杭州天气"
 	text := "#### 杭州天气  \n > 9度，@1825718XXXX 西北风1级，空气良89，相对温度73%\n\n > ![screenshot](http://i01.lw.aliimg.com/media/lALPBbCc1ZhJGIvNAkzNBLA_1200_588.png)\n  > ###### 10点20分发布 [天气](http://www.thinkpage.cn/) "
@@ -54,10 +56,9 @@ func ExampleSendMarkdown() {
 	}
 }
 
-func ExampleSendActionCard() {
-	// You should replace the webhook here with your own.
-	webhook := "https://oapi.dingtalk.com/robot/send?access_token=xxx"
+func TestRobot_SendActionCard(t *testing.T) {
 	robot := dingrobot.NewRobot(webhook)
+	robot.SetSecret(secret)
 
 	title := "乔布斯 20 年前想打造一间苹果咖啡厅，而它正是 Apple Store 的前身"
 	text := "![screenshot](@lADOpwk3K80C0M0FoA) \n #### 乔布斯 20 年前想打造的苹果咖啡厅 \n\n Apple Store 的设计正从原来满满的科技感走向生活化，而其生活化的走向其实可以追溯到 20 年前苹果一个建立咖啡馆的计划"
